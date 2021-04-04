@@ -1,3 +1,4 @@
+/* Copyright © 2021 */
 package com.ab.ploy.persistence
 
 import com.faunadb.client.FaunaClient

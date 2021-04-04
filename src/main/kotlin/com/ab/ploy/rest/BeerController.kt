@@ -1,3 +1,4 @@
+/* Copyright © 2021 */
 package com.ab.ploy.rest
 
 import com.ab.ploy.models.Beer
