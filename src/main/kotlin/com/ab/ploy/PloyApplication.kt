@@ -7,12 +7,13 @@ import com.faunadb.client.types.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.http.ResponseEntity
-import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.*
-import java.util.concurrent.CompletableFuture
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.RestController
 
 @SpringBootApplication
-@Controller
+@RestController
 class PloyApplication {
 
     @org.springframework.beans.factory.annotation.Value("\${fauna-db.secret}")
@@ -39,7 +40,7 @@ class PloyApplication {
 
     fun createBeers() {
         val client = FaunaClient.builder()
-            .withSecret("fnAEF85GlIACAcQc4a-t5MmBVj6v9S7b5XDgpzKJ")
+            .withSecret(faunaDbSecret)
             .build();
 
         val completableFuture = client.query(
