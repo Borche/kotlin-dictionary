@@ -19,7 +19,7 @@ class PloyApplication {
     @org.springframework.beans.factory.annotation.Value("\${fauna-db.secret}")
     lateinit var faunaDbSecret: String
 
-    @PostMapping("/beers")
+    // @PostMapping("/beers")
     @ResponseBody
     fun helloWorld(@RequestBody beer: Beer): ResponseEntity<Beer> {
         val client = FaunaClient.builder()
