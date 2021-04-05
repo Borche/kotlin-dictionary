@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class BeerService(val beerRepository: BeerRepository) {
-    fun getBeers() = listOf(Beer("Carlsberg", "4,8%"))
+
+    fun getBeers() = beerRepository.getAll()
+
     fun createBeer(beer: Beer) = beerRepository.create(beer)
 }

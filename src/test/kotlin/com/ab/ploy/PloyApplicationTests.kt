@@ -7,8 +7,5 @@ import org.springframework.boot.test.context.SpringBootTest
 @SpringBootTest
 class PloyApplicationTests {
 
-    @Test
-    fun contextLoads() {
-    }
-
+    @Test fun contextLoads() {}
 }
