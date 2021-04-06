@@ -1,10 +1,10 @@
 
 language: java
-script: mvn clean verify
+install: mvn clean install
 before_install:
   - chmod a+x ./mvnw
 
-before_deploy: echo 'Andreas ready?'
+before_deploy: "echo 'Ready for deploy, Andreas?'"
 deploy:
   provider: heroku
   api_key:
@@ -12,4 +12,4 @@ deploy:
   true:
     branch: main
   app: ploy-hoy
-after_deploy: echo 'Andreas ready?'
+after_deploy: "echo 'Deploy done! Go check it out!'"
