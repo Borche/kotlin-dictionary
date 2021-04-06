@@ -1,4 +1,4 @@
-# language: java
+language: java
 # script: mvn clean verify
 
 before_deploy: echo 'Andreas ready?'
