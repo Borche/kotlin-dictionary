@@ -18,6 +18,7 @@ class PloyResponseWrapper(private val response: ContentCachingResponseWrapper, v
             "Outgoing Response" +
                 "\n---------------------------" +
                 "\nType: Response" +
+                "\nID: {}" +
                 "\nResponse-Code: {}" +
                 "\nContent-Type: {}" +
                 "\nContent-Length: {}" +
@@ -25,6 +26,7 @@ class PloyResponseWrapper(private val response: ContentCachingResponseWrapper, v
                 "\nHeaders: {}" +
                 "\nPayload: {}" +
                 "\n---------------------------",
+            requestId,
             response.status,
             response.contentType,
             response.contentSize,

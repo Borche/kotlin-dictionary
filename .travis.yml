@@ -1,8 +1,10 @@
 
 language: java
-install: mvn clean install
+
 before_install:
   - chmod a+x ./mvnw
+install: ./mvnw clean install
+
 
 before_deploy: "echo 'Ready for deploy, Andreas?'"
 deploy:
