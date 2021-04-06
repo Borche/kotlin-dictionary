@@ -1,7 +1,8 @@
+
 language: java
-before_script:
-  - chmod a+x ./mvnw
 script: mvn clean verify
+before_install:
+  - chmod a+x ./mvnw
 
 before_deploy: echo 'Andreas ready?'
 deploy:
