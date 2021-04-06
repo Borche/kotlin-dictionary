@@ -5,6 +5,8 @@ before_install:
   - chmod a+x ./mvnw
 install: ./mvnw clean install
 
+script: Skip
+
 
 before_deploy: "echo 'Ready for deploy, Andreas?'"
 deploy:
