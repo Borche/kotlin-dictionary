@@ -7,6 +7,7 @@ import com.faunadb.client.types.FaunaField
 data class Beer
 @FaunaConstructor
 constructor(
+    @FaunaField var id: String?,
     @FaunaField var name: String? = "default-beer-name",
     @FaunaField var alcohol: String? = "default-alcohol"
 )
