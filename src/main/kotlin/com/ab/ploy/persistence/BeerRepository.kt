@@ -33,7 +33,6 @@ class BeerRepository(val client: FaunaClient) {
      * Get all beers with their ids merged into the beer.
      */
     fun getAll(): MutableCollection<Beer>? {
-        // Select(Value("data"), Get(Var("doc")))
         return client
             .query(
                 SelectAsIndex(
@@ -47,13 +46,6 @@ class BeerRepository(val client: FaunaClient) {
             .thenApply { it.asCollectionOf(Beer::class.java).get() }
             .get().toMutableList()
     }
-
-    /*Lambda("doc",
-    Merge(
-    Obj("id", Select(Arr(Value("ref"), Value("id")), Get(Var("doc")))),
-    Select(Value("data"), Get(Var("doc")))
-    )
-    )*/
 
     /**
      * Create a new beer and return the beer with its id merged into it.
@@ -70,10 +62,7 @@ class BeerRepository(val client: FaunaClient) {
                 )
             ).get()
 
-        val createdBeer: Beer = result.to(Beer::class.java).get()
-        // createdBeer.id = (result.at("ref") as Value.RefV).id
-
-        return createdBeer
+        return result.to(Beer::class.java).get()
     }
 
     fun delete(name: String): Beer? {
