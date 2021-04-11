@@ -20,38 +20,38 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class WordRepository(val client: FaunaClient) {
-    companion object {
-        const val WORD_COLLECTION_NAME = "words"
-    }
+  companion object {
+    const val WORD_COLLECTION_NAME = "words"
+  }
 
-    fun create(word: Word): Word {
-        val result: Value =
-            client
-                .query(
-                    Call(
-                        Function("MergeIdAndData"),
-                        Create(Collection(WORD_COLLECTION_NAME), Obj("data", Value(word)))))
-                .get()
+  fun create(word: Word): Word {
+    val result: Value =
+        client
+            .query(
+                Call(
+                    Function("MergeIdAndData"),
+                    Create(Collection(WORD_COLLECTION_NAME), Obj("data", Value(word)))))
+            .get()
 
-        return result.to(Word::class.java).get()
-    }
+    return result.to(Word::class.java).get()
+  }
 
-    fun replace(word: Word): Word {
-        val result: Value =
-            client
-                .query(
-                    Call(
-                        Function("MergeIdAndData"),
-                        Replace(
-                            Select(
-                                Value("ref"),
-                                Get(
-                                    Match(
-                                        Index("word_by_word_and_language"),
-                                        Arr(Value(word.word), Value(word.language))))),
-                            Obj("data", Value(word)))))
-                .get()
+  fun replace(word: Word): Word {
+    val result: Value =
+        client
+            .query(
+                Call(
+                    Function("MergeIdAndData"),
+                    Replace(
+                        Select(
+                            Value("ref"),
+                            Get(
+                                Match(
+                                    Index("word_by_word_and_language"),
+                                    Arr(Value(word.word), Value(word.language))))),
+                        Obj("data", Value(word)))))
+            .get()
 
-        return result.to(Word::class.java).get()
-    }
+    return result.to(Word::class.java).get()
+  }
 }

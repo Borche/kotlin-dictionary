@@ -13,21 +13,21 @@ constructor(
     @FaunaField var word: String?,
     @FaunaField var type: String?
 ) {
-    @FaunaField var translatedLanguages: TranslatedLanguages? = null
+  @FaunaField var translatedLanguages: TranslatedLanguages? = null
 }
 
 class TranslatedLanguages {
-    var swedish: TranslatedLanguage? = null
-    var english: TranslatedLanguage? = null
-    var spanish: TranslatedLanguage? = null
+  var swedish: TranslatedLanguage? = null
+  var english: TranslatedLanguage? = null
+  var spanish: TranslatedLanguage? = null
 }
 
 class TranslatedLanguage @FaunaConstructor constructor() {
-    var translations: List<SimpleWord>? = null
-    var propagate: Boolean? = null
-        @FaunaIgnore get
+  var translations: List<SimpleWord>? = null
+  var propagate: Boolean? = null
+    @FaunaIgnore get
 }
 
 class SimpleWord {
-    var word: String? = null
+  var word: String? = null
 }

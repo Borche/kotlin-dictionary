@@ -20,32 +20,32 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/beers")
 class BeerController(val beerService: BeerService) {
 
-    @GetMapping fun getBeers(): MutableCollection<Beer>? = beerService.getBeers()
+  @GetMapping fun getBeers(): MutableCollection<Beer>? = beerService.getBeers()
 
-    @PostMapping
-    fun createBeer(@RequestBody beer: Beer): Beer {
-        return beerService.createBeer(beer)
-    }
+  @PostMapping
+  fun createBeer(@RequestBody beer: Beer): Beer {
+    return beerService.createBeer(beer)
+  }
 
-    @PostMapping("/dummy")
-    fun dummyBeer(@RequestBody beer: Beer): Beer {
-        return Beer("Dummy", "4,2%")
-    }
+  @PostMapping("/dummy")
+  fun dummyBeer(@RequestBody beer: Beer): Beer {
+    return Beer("Dummy", "4,2%")
+  }
 
-    @DeleteMapping("/{name}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteBeer(@PathVariable name: String) {
-        beerService.deleteBeer(name)
-    }
+  @DeleteMapping("/{name}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  fun deleteBeer(@PathVariable name: String) {
+    beerService.deleteBeer(name)
+  }
 
-    /*
-     * -- Exception handling --
-     */
+  /*
+   * -- Exception handling --
+   */
 
-    @ExceptionHandler(BadRequestException::class)
-    fun instanceNotUnique(e: BadRequestException): ResponseEntity<ErrorResponse> {
-        if (e.message?.contains("unique") == true)
-            return ResponseEntity.badRequest().body(ErrorResponse("Beer must be unique"))
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
-    }
+  @ExceptionHandler(BadRequestException::class)
+  fun instanceNotUnique(e: BadRequestException): ResponseEntity<ErrorResponse> {
+    if (e.message?.contains("unique") == true)
+        return ResponseEntity.badRequest().body(ErrorResponse("Beer must be unique"))
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
+  }
 }

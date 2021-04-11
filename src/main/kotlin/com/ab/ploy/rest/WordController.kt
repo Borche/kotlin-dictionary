@@ -18,29 +18,29 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/words")
 class WordController(val wordService: WordService) {
 
-    @PostMapping
-    fun createWord(@RequestBody word: Word): Word {
-        return wordService.createWord(word)
-    }
+  @PostMapping
+  fun createWord(@RequestBody word: Word): Word {
+    return wordService.createWord(word)
+  }
 
-    @PutMapping
-    fun replaceWord(@RequestBody word: Word): Word {
-        return wordService.replaceWord(word)
-    }
+  @PutMapping
+  fun replaceWord(@RequestBody word: Word): Word {
+    return wordService.replaceWord(word)
+  }
 
-    /*
-     * -- Exception handling --
-     */
+  /*
+   * -- Exception handling --
+   */
 
-    @ExceptionHandler(BadRequestException::class)
-    fun instanceNotUnique(e: BadRequestException): ResponseEntity<ErrorResponse> {
-        if (e.message?.contains("unique") == true)
-            return ResponseEntity.badRequest()
-                .body(ErrorResponse("Combination of word and language already exists"))
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
-    }
+  @ExceptionHandler(BadRequestException::class)
+  fun instanceNotUnique(e: BadRequestException): ResponseEntity<ErrorResponse> {
+    if (e.message?.contains("unique") == true)
+        return ResponseEntity.badRequest()
+            .body(ErrorResponse("Combination of word and language already exists"))
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
+  }
 
-    @ExceptionHandler(NotFoundException::class)
-    fun instanceNotFound(e: NotFoundException) =
-        ResponseEntity.badRequest().body(ErrorResponse("Word does not exist"))
+  @ExceptionHandler(NotFoundException::class)
+  fun instanceNotFound(e: NotFoundException) =
+      ResponseEntity.badRequest().body(ErrorResponse("Word does not exist"))
 }
