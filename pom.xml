@@ -137,13 +137,13 @@
                             <include>src/test/kotlin/**/*.kt</include>
                         </includes>
 
-                        <!--<ktfmt>
+                        <ktfmt>
                             <version>0.24</version>
                             <style>DROPBOX</style>
-                        </ktfmt>-->
-                        <ktlint>
+                        </ktfmt>
+                        <!-- <ktlint>
                             <version>0.41.0</version>
-                        </ktlint>
+                        </ktlint>-->
 
                         <licenseHeader>
                             <content>/* Copyright &#169; $YEAR */</content>

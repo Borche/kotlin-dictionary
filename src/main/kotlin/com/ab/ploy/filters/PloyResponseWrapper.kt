@@ -1,14 +1,15 @@
 /* Copyright © 2021 */
 package com.ab.ploy.filters
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
-import org.springframework.web.util.ContentCachingResponseWrapper
 import java.nio.charset.Charset
 import javax.servlet.http.HttpServletResponse
 import javax.servlet.http.HttpServletResponseWrapper
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import org.springframework.web.util.ContentCachingResponseWrapper
 
-class PloyResponseWrapper(private val response: ContentCachingResponseWrapper, val requestId: Int) : HttpServletResponseWrapper(response) {
+class PloyResponseWrapper(private val response: ContentCachingResponseWrapper, val requestId: Int) :
+    HttpServletResponseWrapper(response) {
 
     private val log: Logger = LoggerFactory.getLogger(PloyResponseWrapper::class.java)
 
@@ -32,15 +33,15 @@ class PloyResponseWrapper(private val response: ContentCachingResponseWrapper, v
             response.contentSize,
             response.characterEncoding,
             buildHeaderString(response),
-            String(allBytes, Charset.forName(response.characterEncoding))
-        )
+            String(allBytes, Charset.forName(response.characterEncoding)))
 
         // Copy the response body content back into the real response
         response.copyBodyToResponse()
     }
 
     fun buildHeaderString(response: HttpServletResponse) =
-        if (response.headerNames.isEmpty()) "{}" else
+        if (response.headerNames.isEmpty()) "{}"
+        else
             response
                 .headerNames
                 .toList()

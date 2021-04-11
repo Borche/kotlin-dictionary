@@ -49,11 +49,7 @@ class PloyApplication {
                         Value("beer"),
                         Create(
                             Collection("beers"),
-                            Obj("data", Obj("name", Var("beer"), "alcohol", Value("5%")))
-                        )
-                    )
-                )
-            )
+                            Obj("data", Obj("name", Var("beer"), "alcohol", Value("5%")))))))
     }
 }
 

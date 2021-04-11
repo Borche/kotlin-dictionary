@@ -3,11 +3,17 @@ package com.ab.ploy.persistence
 
 import com.ab.ploy.models.Word
 import com.faunadb.client.FaunaClient
+import com.faunadb.client.query.Language.Arr
 import com.faunadb.client.query.Language.Call
 import com.faunadb.client.query.Language.Collection
 import com.faunadb.client.query.Language.Create
 import com.faunadb.client.query.Language.Function
+import com.faunadb.client.query.Language.Get
+import com.faunadb.client.query.Language.Index
+import com.faunadb.client.query.Language.Match
 import com.faunadb.client.query.Language.Obj
+import com.faunadb.client.query.Language.Replace
+import com.faunadb.client.query.Language.Select
 import com.faunadb.client.query.Language.Value
 import com.faunadb.client.types.Value
 import org.springframework.stereotype.Repository
@@ -19,15 +25,32 @@ class WordRepository(val client: FaunaClient) {
     }
 
     fun create(word: Word): Word {
-        val result: Value = client.query(
-            Call(
-                Function("MergeIdAndData"),
-                Create(
-                    Collection(WORD_COLLECTION_NAME),
-                    Obj("data", Value(word))
-                )
-            )
-        ).get()
+        val result: Value =
+            client
+                .query(
+                    Call(
+                        Function("MergeIdAndData"),
+                        Create(Collection(WORD_COLLECTION_NAME), Obj("data", Value(word)))))
+                .get()
+
+        return result.to(Word::class.java).get()
+    }
+
+    fun replace(word: Word): Word {
+        val result: Value =
+            client
+                .query(
+                    Call(
+                        Function("MergeIdAndData"),
+                        Replace(
+                            Select(
+                                Value("ref"),
+                                Get(
+                                    Match(
+                                        Index("word_by_word_and_language"),
+                                        Arr(Value(word.word), Value(word.language))))),
+                            Obj("data", Value(word)))))
+                .get()
 
         return result.to(Word::class.java).get()
     }

@@ -29,9 +29,7 @@ class BeerRepository(val client: FaunaClient) {
         const val BEER_COLLECTION_NAME = "beers"
     }
 
-    /**
-     * Get all beers with their ids merged into the beer.
-     */
+    /** Get all beers with their ids merged into the beer. */
     fun getAll(): MutableCollection<Beer>? {
         return client
             .query(
@@ -39,47 +37,33 @@ class BeerRepository(val client: FaunaClient) {
                     Value("data"),
                     Map(
                         Paginate(Documents(Collection(BEER_COLLECTION_NAME))),
-                        Lambda("doc", Call(Function("GetMergeIdAndData"), Var("doc")))
-                    )
-                )
-            )
+                        Lambda("doc", Call(Function("GetMergeIdAndData"), Var("doc"))))))
             .thenApply { it.asCollectionOf(Beer::class.java).get() }
-            .get().toMutableList()
+            .get()
+            .toMutableList()
     }
 
-    /**
-     * Create a new beer and return the beer with its id merged into it.
-     */
+    /** Create a new beer and return the beer with its id merged into it. */
     fun create(beer: Beer): Beer {
         val result: Value =
-            client.query(
-                Call(
-                    Function("MergeIdAndData"),
-                    Create(
-                        Collection(BEER_COLLECTION_NAME),
-                        Obj("data", Value(beer))
-                    )
-                )
-            ).get()
+            client
+                .query(
+                    Call(
+                        Function("MergeIdAndData"),
+                        Create(Collection(BEER_COLLECTION_NAME), Obj("data", Value(beer)))))
+                .get()
 
         return result.to(Beer::class.java).get()
     }
 
     fun delete(name: String): Beer? {
         val result: Value =
-            client.query(
-                Delete(
-                    Select(
-                        Value("ref"),
-                        Get(
-                            Match(
-                                Index(Value("beer_by_name")),
-                                Value(name)
-                            )
-                        )
-                    )
-                )
-            ).get()
+            client
+                .query(
+                    Delete(
+                        Select(
+                            Value("ref"), Get(Match(Index(Value("beer_by_name")), Value(name))))))
+                .get()
 
         return result.at("data").to(Beer::class.java).get()
     }

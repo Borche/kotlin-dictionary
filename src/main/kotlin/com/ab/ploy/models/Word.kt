@@ -6,7 +6,8 @@ import com.faunadb.client.types.FaunaField
 import com.faunadb.client.types.FaunaIgnore
 
 class Word
-@FaunaConstructor constructor(
+@FaunaConstructor
+constructor(
     @FaunaField var id: String?,
     @FaunaField var language: String?,
     @FaunaField var word: String?,
@@ -21,8 +22,7 @@ class TranslatedLanguages {
     var spanish: TranslatedLanguage? = null
 }
 
-class TranslatedLanguage
-@FaunaConstructor constructor() {
+class TranslatedLanguage @FaunaConstructor constructor() {
     var translations: List<SimpleWord>? = null
     var propagate: Boolean? = null
         @FaunaIgnore get

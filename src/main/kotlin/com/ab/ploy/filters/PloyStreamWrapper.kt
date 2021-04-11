@@ -5,7 +5,8 @@ import java.io.InputStream
 import javax.servlet.ReadListener
 import javax.servlet.ServletInputStream
 
-class PloyStreamWrapper(private val oldStream: InputStream, private val newStream: InputStream) : ServletInputStream() {
+class PloyStreamWrapper(private val oldStream: InputStream, private val newStream: InputStream) :
+    ServletInputStream() {
     override fun read(): Int {
         return newStream.read()
     }
