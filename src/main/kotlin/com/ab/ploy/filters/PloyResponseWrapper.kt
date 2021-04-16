@@ -11,40 +11,37 @@ import org.springframework.web.util.ContentCachingResponseWrapper
 class PloyResponseWrapper(private val response: ContentCachingResponseWrapper, val requestId: Int) :
     HttpServletResponseWrapper(response) {
 
-  private val log: Logger = LoggerFactory.getLogger(PloyResponseWrapper::class.java)
+    private val log: Logger = LoggerFactory.getLogger(PloyResponseWrapper::class.java)
 
-  fun logResponse() {
-    val allBytes: ByteArray = response.contentAsByteArray
-    log.info(
-        "Outgoing Response" +
-            "\n---------------------------" +
-            "\nType: Response" +
-            "\nID: {}" +
-            "\nResponse-Code: {}" +
-            "\nContent-Type: {}" +
-            "\nContent-Length: {}" +
-            "\nCharacter-Encoding: {}" +
-            "\nHeaders: {}" +
-            "\nPayload: {}" +
-            "\n---------------------------",
-        requestId,
-        response.status,
-        response.contentType,
-        response.contentSize,
-        response.characterEncoding,
-        buildHeaderString(response),
-        String(allBytes, Charset.forName(response.characterEncoding)))
+    fun logResponse() {
+        val allBytes: ByteArray = response.contentAsByteArray
+        log.info(
+            "Outgoing Response" +
+                "\n--------------------------- RESPONSE: $requestId ---------------------------" +
+                "\nHttp-Status: {}" +
+                "\nContent-Type: {}" +
+                "\nContent-Length: {}" +
+                "\nCharacter-Encoding: {}" +
+                "\nHeaders: {}" +
+                "\nPayload: {}" +
+                "\n---------------------------",
+            response.status,
+            response.contentType,
+            response.contentSize,
+            response.characterEncoding,
+            buildHeaderString(response),
+            String(allBytes, Charset.forName(response.characterEncoding)))
 
-    // Copy the response body content back into the real response
-    response.copyBodyToResponse()
-  }
+        // Copy the response body content back into the real response
+        response.copyBodyToResponse()
+    }
 
-  fun buildHeaderString(response: HttpServletResponse) =
-      if (response.headerNames.isEmpty()) "{}"
-      else
-          response
-              .headerNames
-              .toList()
-              .map { "$it=${response.getHeader(it)}" }
-              .joinToString(", ", "{ ", " }")
+    fun buildHeaderString(response: HttpServletResponse) =
+        if (response.headerNames.isEmpty()) "{}"
+        else
+            response
+                .headerNames
+                .toList()
+                .map { "$it=${response.getHeader(it)}" }
+                .joinToString(", ", "{ ", " }")
 }

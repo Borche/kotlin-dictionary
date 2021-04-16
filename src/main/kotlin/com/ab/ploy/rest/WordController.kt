@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/words")
 class WordController(val wordService: WordService) {
 
-  @GetMapping fun getWords() = wordService.getWords()
+    @GetMapping fun getWords() = wordService.getWords()
 
-  @PostMapping fun createWord(@RequestBody word: Word) = wordService.createWord(word)
+    @PostMapping fun createWord(@RequestBody word: Word) = wordService.createWord(word)
 }

@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RestController
 @SpringBootApplication @RestController class PloyApplication
 
 fun main(args: Array<String>) {
-  runApplication<PloyApplication>(*args)
+    runApplication<PloyApplication>(*args)
 }

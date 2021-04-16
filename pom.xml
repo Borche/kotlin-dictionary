@@ -157,7 +157,7 @@
 
                         <ktfmt>
                             <version>0.24</version>
-                            <!-- <style>DROPBOX</style>-->
+                            <style>DROPBOX</style>
                         </ktfmt>
                         <!-- <ktlint>
                             <version>0.41.0</version>

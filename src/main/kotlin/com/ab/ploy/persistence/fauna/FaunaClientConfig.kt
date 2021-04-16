@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class FaunaClientConfig {
 
-  @Value("\${fauna-db.secret}") lateinit var faunaDbSecret: String
+    @Value("\${fauna-db.secret}") lateinit var faunaDbSecret: String
 
-  @Bean
-  fun FaunaClient(): FaunaClient {
-    return FaunaClient.builder().withSecret(faunaDbSecret).build()
-  }
+    @Bean
+    fun FaunaClient(): FaunaClient {
+        return FaunaClient.builder().withSecret(faunaDbSecret).build()
+    }
 }

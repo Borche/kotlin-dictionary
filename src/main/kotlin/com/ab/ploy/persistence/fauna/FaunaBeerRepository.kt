@@ -25,44 +25,46 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class FaunaBeerRepository(val client: FaunaClient) {
-  companion object {
-    const val BEER_COLLECTION_NAME = "beers"
-  }
+    companion object {
+        const val BEER_COLLECTION_NAME = "beers"
+    }
 
-  /** Get all beers with their ids merged into the beer. */
-  fun getAll(): MutableCollection<FaunaBeer>? {
-    return client
-        .query(
-            SelectAsIndex(
-                Value("data"),
-                Map(
-                    Paginate(Documents(Collection(BEER_COLLECTION_NAME))),
-                    Lambda("doc", Call(Function("GetMergeIdAndData"), Var("doc"))))))
-        .thenApply { it.asCollectionOf(FaunaBeer::class.java).get() }
-        .get()
-        .toMutableList()
-  }
-
-  /** Create a new beer and return the beer with its id merged into it. */
-  fun create(beer: FaunaBeer): FaunaBeer {
-    val result: Value =
-        client
+    /** Get all beers with their ids merged into the beer. */
+    fun getAll(): MutableCollection<FaunaBeer>? {
+        return client
             .query(
-                Call(
-                    Function("MergeIdAndData"),
-                    Create(Collection(BEER_COLLECTION_NAME), Obj("data", Value(beer)))))
+                SelectAsIndex(
+                    Value("data"),
+                    Map(
+                        Paginate(Documents(Collection(BEER_COLLECTION_NAME))),
+                        Lambda("doc", Call(Function("GetMergeIdAndData"), Var("doc"))))))
+            .thenApply { it.asCollectionOf(FaunaBeer::class.java).get() }
             .get()
+            .toMutableList()
+    }
 
-    return result.to(FaunaBeer::class.java).get()
-  }
+    /** Create a new beer and return the beer with its id merged into it. */
+    fun create(beer: FaunaBeer): FaunaBeer {
+        val result: Value =
+            client
+                .query(
+                    Call(
+                        Function("MergeIdAndData"),
+                        Create(Collection(BEER_COLLECTION_NAME), Obj("data", Value(beer)))))
+                .get()
 
-  fun delete(name: String): FaunaBeer? {
-    val result: Value =
-        client
-            .query(
-                Delete(Select(Value("ref"), Get(Match(Index(Value("beer_by_name")), Value(name))))))
-            .get()
+        return result.to(FaunaBeer::class.java).get()
+    }
 
-    return result.at("data").to(FaunaBeer::class.java).get()
-  }
+    fun delete(name: String): FaunaBeer? {
+        val result: Value =
+            client
+                .query(
+                    Delete(
+                        Select(
+                            Value("ref"), Get(Match(Index(Value("beer_by_name")), Value(name))))))
+                .get()
+
+        return result.at("data").to(FaunaBeer::class.java).get()
+    }
 }

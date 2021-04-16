@@ -16,23 +16,23 @@ import org.springframework.web.util.ContentCachingResponseWrapper
 @Order(1)
 class ReqResLoggingFilterOncePerRequest : OncePerRequestFilter() {
 
-  companion object {
-    val nextRequestId: AtomicInteger = AtomicInteger(0)
-  }
-  private val log: Logger = LoggerFactory.getLogger(ReqResLoggingFilterOncePerRequest::class.java)
+    companion object {
+        val nextRequestId: AtomicInteger = AtomicInteger(0)
+    }
+    private val log: Logger = LoggerFactory.getLogger(ReqResLoggingFilterOncePerRequest::class.java)
 
-  override fun doFilterInternal(
-      request: HttpServletRequest,
-      response: HttpServletResponse,
-      filterChain: FilterChain
-  ) {
-    val requestId = nextRequestId.incrementAndGet()
+    override fun doFilterInternal(
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+        filterChain: FilterChain
+    ) {
+        val requestId = nextRequestId.incrementAndGet()
 
-    val res = PloyResponseWrapper(ContentCachingResponseWrapper(response), requestId)
+        val res = PloyResponseWrapper(ContentCachingResponseWrapper(response), requestId)
 
-    filterChain.doFilter(PloyRequestWrapper(request, requestId), res)
+        filterChain.doFilter(PloyRequestWrapper(request, requestId), res)
 
-    // Log the response just before returning it from our server
-    res.logResponse()
-  }
+        // Log the response just before returning it from our server
+        res.logResponse()
+    }
 }

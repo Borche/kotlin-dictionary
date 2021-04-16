@@ -10,16 +10,16 @@ import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration
 
 @Configuration
 class MongoConfig : AbstractMongoClientConfiguration() {
-  override fun getDatabaseName() = "ploy"
+    override fun getDatabaseName() = "ploy"
 
-  override fun mongoClient(): MongoClient {
-    val connectionString =
-        ConnectionString(
-            "mongodb+srv://andreas:DEcember10!=@ployfrankfurt.jmuac.mongodb.net/ploy?retryWrites=true&w=majority")
+    override fun mongoClient(): MongoClient {
+        val connectionString =
+            ConnectionString(
+                "mongodb+srv://andreas:DEcember10!=@ployfrankfurt.jmuac.mongodb.net/ploy?retryWrites=true&w=majority")
 
-    val mongoClientSettings =
-        MongoClientSettings.builder().applyConnectionString(connectionString).build()
+        val mongoClientSettings =
+            MongoClientSettings.builder().applyConnectionString(connectionString).build()
 
-    return MongoClients.create(mongoClientSettings)
-  }
+        return MongoClients.create(mongoClientSettings)
+    }
 }

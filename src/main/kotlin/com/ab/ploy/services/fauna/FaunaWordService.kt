@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service
 
 @Service
 class FaunaWordService(val wordRepository: FaunaWordRepository) {
-  fun createWord(word: FaunaWord) = wordRepository.create(word)
-  fun replaceWord(word: FaunaWord) = wordRepository.replace(word)
+    fun createWord(word: FaunaWord) = wordRepository.create(word)
+    fun replaceWord(word: FaunaWord) = wordRepository.replace(word)
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class FaunaBeerService(val beerRepository: FaunaBeerRepository) {
-  fun getBeers() = beerRepository.getAll()
-  fun createBeer(beer: FaunaBeer) = beerRepository.create(beer)
-  fun deleteBeer(name: String) = beerRepository.delete(name)
+    fun getBeers() = beerRepository.getAll()
+    fun createBeer(beer: FaunaBeer) = beerRepository.create(beer)
+    fun deleteBeer(name: String) = beerRepository.delete(name)
 }
