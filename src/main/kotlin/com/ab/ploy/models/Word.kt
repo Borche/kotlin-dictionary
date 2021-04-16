@@ -1,33 +1,8 @@
 /* Copyright © 2021 */
 package com.ab.ploy.models
 
-import com.faunadb.client.types.FaunaConstructor
-import com.faunadb.client.types.FaunaField
-import com.faunadb.client.types.FaunaIgnore
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
-class Word
-@FaunaConstructor
-constructor(
-    @FaunaField var id: String?,
-    @FaunaField var language: String?,
-    @FaunaField var word: String?,
-    @FaunaField var type: String?
-) {
-  @FaunaField var translatedLanguages: TranslatedLanguages? = null
-}
-
-class TranslatedLanguages {
-  var swedish: TranslatedLanguage? = null
-  var english: TranslatedLanguage? = null
-  var spanish: TranslatedLanguage? = null
-}
-
-class TranslatedLanguage @FaunaConstructor constructor() {
-  var translations: List<SimpleWord>? = null
-  var propagate: Boolean? = null
-    @FaunaIgnore get
-}
-
-class SimpleWord {
-  var word: String? = null
-}
+@Document(collection = "words")
+data class Word(@Id val id: String?, val language: String, val word: String, val type: String)

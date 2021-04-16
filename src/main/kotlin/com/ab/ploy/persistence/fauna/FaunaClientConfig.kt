@@ -1,5 +1,5 @@
 /* Copyright © 2021 */
-package com.ab.ploy.persistence
+package com.ab.ploy.persistence.fauna
 
 import com.faunadb.client.FaunaClient
 import org.springframework.beans.factory.annotation.Value

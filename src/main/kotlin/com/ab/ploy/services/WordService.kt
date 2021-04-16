@@ -6,7 +6,7 @@ import com.ab.ploy.persistence.WordRepository
 import org.springframework.stereotype.Service
 
 @Service
-class WordService(val wordRepository: WordRepository) {
-  fun createWord(word: Word) = wordRepository.create(word)
-  fun replaceWord(word: Word) = wordRepository.replace(word)
+class WordService(private val wordRepository: WordRepository) {
+  fun getWords(): MutableList<Word> = wordRepository.findAll()
+  fun createWord(word: Word): Word = wordRepository.save(word)
 }

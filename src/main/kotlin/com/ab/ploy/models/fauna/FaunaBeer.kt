@@ -1,10 +1,10 @@
 /* Copyright © 2021 */
-package com.ab.ploy.models
+package com.ab.ploy.models.fauna
 
 import com.faunadb.client.types.FaunaConstructor
 import com.faunadb.client.types.FaunaField
 
-data class Beer
+data class FaunaBeer
 @FaunaConstructor
 constructor(
     @FaunaField var id: String?,

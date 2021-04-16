@@ -1,8 +1,9 @@
 /* Copyright © 2021 */
-package com.ab.ploy.rest
+package com.ab.ploy.rest.fauna
 
-import com.ab.ploy.models.Beer
-import com.ab.ploy.services.BeerService
+import com.ab.ploy.models.fauna.FaunaBeer
+import com.ab.ploy.rest.ErrorResponse
+import com.ab.ploy.services.fauna.FaunaBeerService
 import com.faunadb.client.errors.BadRequestException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -18,18 +19,18 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController()
 @RequestMapping("/beers")
-class BeerController(val beerService: BeerService) {
+class FaunaBeerController(val beerService: FaunaBeerService) {
 
-  @GetMapping fun getBeers(): MutableCollection<Beer>? = beerService.getBeers()
+  @GetMapping fun getBeers(): MutableCollection<FaunaBeer>? = beerService.getBeers()
 
   @PostMapping
-  fun createBeer(@RequestBody beer: Beer): Beer {
+  fun createBeer(@RequestBody beer: FaunaBeer): FaunaBeer {
     return beerService.createBeer(beer)
   }
 
   @PostMapping("/dummy")
-  fun dummyBeer(@RequestBody beer: Beer): Beer {
-    return Beer("Dummy", "4,2%")
+  fun dummyBeer(@RequestBody beer: FaunaBeer): FaunaBeer {
+    return FaunaBeer("Dummy", "4,2%")
   }
 
   @DeleteMapping("/{name}")

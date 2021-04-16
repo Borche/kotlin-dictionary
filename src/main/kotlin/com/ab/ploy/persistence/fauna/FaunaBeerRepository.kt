@@ -1,7 +1,7 @@
 /* Copyright © 2021 */
-package com.ab.ploy.persistence
+package com.ab.ploy.persistence.fauna
 
-import com.ab.ploy.models.Beer
+import com.ab.ploy.models.fauna.FaunaBeer
 import com.faunadb.client.FaunaClient
 import com.faunadb.client.query.Language.Call
 import com.faunadb.client.query.Language.Collection
@@ -24,13 +24,13 @@ import com.faunadb.client.types.Value
 import org.springframework.stereotype.Repository
 
 @Repository
-class BeerRepository(val client: FaunaClient) {
+class FaunaBeerRepository(val client: FaunaClient) {
   companion object {
     const val BEER_COLLECTION_NAME = "beers"
   }
 
   /** Get all beers with their ids merged into the beer. */
-  fun getAll(): MutableCollection<Beer>? {
+  fun getAll(): MutableCollection<FaunaBeer>? {
     return client
         .query(
             SelectAsIndex(
@@ -38,13 +38,13 @@ class BeerRepository(val client: FaunaClient) {
                 Map(
                     Paginate(Documents(Collection(BEER_COLLECTION_NAME))),
                     Lambda("doc", Call(Function("GetMergeIdAndData"), Var("doc"))))))
-        .thenApply { it.asCollectionOf(Beer::class.java).get() }
+        .thenApply { it.asCollectionOf(FaunaBeer::class.java).get() }
         .get()
         .toMutableList()
   }
 
   /** Create a new beer and return the beer with its id merged into it. */
-  fun create(beer: Beer): Beer {
+  fun create(beer: FaunaBeer): FaunaBeer {
     val result: Value =
         client
             .query(
@@ -53,16 +53,16 @@ class BeerRepository(val client: FaunaClient) {
                     Create(Collection(BEER_COLLECTION_NAME), Obj("data", Value(beer)))))
             .get()
 
-    return result.to(Beer::class.java).get()
+    return result.to(FaunaBeer::class.java).get()
   }
 
-  fun delete(name: String): Beer? {
+  fun delete(name: String): FaunaBeer? {
     val result: Value =
         client
             .query(
                 Delete(Select(Value("ref"), Get(Match(Index(Value("beer_by_name")), Value(name))))))
             .get()
 
-    return result.at("data").to(Beer::class.java).get()
+    return result.at("data").to(FaunaBeer::class.java).get()
   }
 }
