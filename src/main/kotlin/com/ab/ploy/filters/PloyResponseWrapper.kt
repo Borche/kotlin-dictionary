@@ -24,7 +24,7 @@ class PloyResponseWrapper(private val response: ContentCachingResponseWrapper, v
                 "\nCharacter-Encoding: {}" +
                 "\nHeaders: {}" +
                 "\nPayload: {}" +
-                "\n---------------------------",
+                "\n\n---------------------------",
             response.status,
             response.contentType,
             response.contentSize,
