@@ -1,7 +1,7 @@
 /* Copyright © 2021 */
 package com.ab.ploy.rest.fauna
 
-import com.ab.ploy.models.FaunaWord
+import com.ab.ploy.models.fauna.FaunaWord
 import com.ab.ploy.rest.ErrorResponse
 import com.ab.ploy.services.fauna.FaunaWordService
 import com.faunadb.client.errors.BadRequestException

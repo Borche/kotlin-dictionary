@@ -15,7 +15,7 @@ class MongoConfig : AbstractMongoClientConfiguration() {
     override fun mongoClient(): MongoClient {
         val connectionString =
             ConnectionString(
-                "mongodb+srv://andreas:DEcember10!=@ployfrankfurt.jmuac.mongodb.net/ploy?retryWrites=true&w=majority")
+                "mongodb+srv://andreas:hej123HEJ@ployfrankfurt.jmuac.mongodb.net/ploy?retryWrites=true&w=majority")
 
         val mongoClientSettings =
             MongoClientSettings.builder().applyConnectionString(connectionString).build()

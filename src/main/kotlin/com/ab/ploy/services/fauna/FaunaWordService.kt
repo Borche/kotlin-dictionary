@@ -1,7 +1,7 @@
 /* Copyright © 2021 */
 package com.ab.ploy.services.fauna
 
-import com.ab.ploy.models.FaunaWord
+import com.ab.ploy.models.fauna.FaunaWord
 import com.ab.ploy.persistence.fauna.FaunaWordRepository
 import org.springframework.stereotype.Service
 

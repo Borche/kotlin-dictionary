@@ -1,7 +1,7 @@
 /* Copyright © 2021 */
 package com.ab.ploy.persistence.fauna
 
-import com.ab.ploy.models.FaunaWord
+import com.ab.ploy.models.fauna.FaunaWord
 import com.faunadb.client.FaunaClient
 import com.faunadb.client.query.Language.Arr
 import com.faunadb.client.query.Language.Call
