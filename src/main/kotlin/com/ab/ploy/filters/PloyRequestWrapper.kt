@@ -38,7 +38,7 @@ class PloyRequestWrapper(var request: HttpServletRequest, requestId: Int) :
             stream = PloyStreamWrapper(request.inputStream, this.bytes!!.inputStream())
         }
 
-        builder.append("\n\n---------------------------")
+        builder.append("\n---------------------------")
         log.info(builder.toString())
     }
 
