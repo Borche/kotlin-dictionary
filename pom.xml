@@ -42,7 +42,6 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-
         <!-- Kotlin -->
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
@@ -63,26 +62,18 @@
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
-        <!-- FaunaDB -->
-        <dependency>
-            <groupId>com.faunadb</groupId>
-            <artifactId>faunadb-java</artifactId>
-            <version>4.0.1</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <!-- Misc -->
-        <dependency>
-            <groupId>com.diffplug.spotless</groupId>
-            <artifactId>spotless-maven-plugin</artifactId>
-            <version>2.9.0</version>
-            <scope>test</scope>
-        </dependency>
-
         <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Other -->
+        <dependency>
+            <groupId>com.diffplug.spotless</groupId>
+            <artifactId>spotless-maven-plugin</artifactId>
+            <version>2.9.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
