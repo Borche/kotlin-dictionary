@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType
 import org.springframework.web.util.ContentCachingResponseWrapper
 
-class PloyResponseWrapper(private val response: ContentCachingResponseWrapper, val requestId: Int) :
+class PloyResponseWrappesr(private val response: ContentCachingResponseWrapper, val requestId: Int) :
     HttpServletResponseWrapper(response) {
 
     private val log: Logger = LoggerFactory.getLogger(PloyResponseWrapper::class.java)

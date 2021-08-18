@@ -15,7 +15,6 @@
     <description>Ploy - Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
-        <kotlin.version>1.4.31</kotlin.version>
     </properties>
     <dependencies>
         <!-- Spring -->
@@ -42,36 +41,17 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-
-        <!-- Kotlin -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-kotlin</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-reflect</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jdk8</artifactId>
-        </dependency>
-
         <!-- MongoDB -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
-        <!-- FaunaDB -->
-        <dependency>
-            <groupId>com.faunadb</groupId>
-            <artifactId>faunadb-java</artifactId>
-            <version>4.0.1</version>
-            <scope>compile</scope>
-        </dependency>
-
         <!-- Misc -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.diffplug.spotless</groupId>
             <artifactId>spotless-maven-plugin</artifactId>
@@ -96,31 +76,18 @@
     </repositories>
 
     <build>
-        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
-        <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
                 <configuration>
-                    <args>
-                        <arg>-Xjsr305=strict</arg>
-                    </args>
-                    <compilerPlugins>
-                        <plugin>spring</plugin>
-                    </compilerPlugins>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.jetbrains.kotlin</groupId>
-                        <artifactId>kotlin-maven-allopen</artifactId>
-                        <version>${kotlin.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
@@ -152,28 +119,36 @@
                             </indent>
                         </format>
                     </formats>
-                    <!-- define a language-specific format -->
-                    <kotlin>
+                    <java>
                         <!-- These are the defaults, you can override if you want -->
                         <includes>
-                            <include>src/main/kotlin/**/*.kt</include>
-                            <include>src/test/kotlin/**/*.kt</include>
+                            <include>src/main/java/**/*.java</include>
+                            <include>src/test/java/**/*.java</include>
                         </includes>
 
-                        <ktfmt>
-                            <version>0.24</version>
-                            <style>DROPBOX</style>
-                        </ktfmt>
-                        <!-- <ktlint>
-                            <version>0.41.0</version>
-                        </ktlint>-->
+                        <importOrder /> <!-- standard import order -->
+                        <importOrder>  <!-- or a custom ordering -->
+                            <order>java,javax,org,com,com.diffplug,</order>
+                            <!-- You probably want an empty string at the end - all of the
+                                 imports you didn't specify explicitly will go there. -->
+                        </importOrder>
+
+                        <removeUnusedImports />
+
+                        <googleJavaFormat>
+                            <version>1.7</version>
+                            <style>GOOGLE</style>
+                        </googleJavaFormat>
+                        <!-- <eclipse />-->
+                        <!--<prettier /> -->
 
                         <licenseHeader>
                             <content>/* Copyright &#169; $YEAR */</content>
                         </licenseHeader>
-                    </kotlin>
+                    </java>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
 </project>

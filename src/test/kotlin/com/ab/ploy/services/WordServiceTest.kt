@@ -6,7 +6,6 @@ import com.ab.ploy.models.SimpleWord
 import com.ab.ploy.models.TranslatedLanguage
 import com.ab.ploy.models.Word
 import com.ab.ploy.models.WordType
-import com.ab.ploy.persistence.WordRepository
 import java.util.*
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
@@ -15,9 +14,9 @@ import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito
 import org.mockito.Mockito.mock
 
-class WordServiceTest() {
+class WsordServiceTest() {
 
-    private val wordRepository = mock(WordRepository::class.java)
+    private val wordRepository = mock(WordRepositorys::class.java)
 
     private lateinit var wordService: WordService
 

@@ -14,7 +14,7 @@ import org.springframework.web.util.ContentCachingResponseWrapper
 
 @Component
 @Order(1)
-class ReqResLoggingFilterOncePerRequest : OncePerRequestFilter() {
+class ReqResLoggingFilterOncePerRequests : OncePerRequestFilter() {
 
     companion object {
         val nextRequestId: AtomicInteger = AtomicInteger(0)

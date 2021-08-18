@@ -9,7 +9,7 @@ import kotlin.text.StringBuilder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-class PloyRequestWrapper(var request: HttpServletRequest, requestId: Int) :
+class PloyRequestWrappers(var request: HttpServletRequest, requestId: Int) :
     HttpServletRequestWrapper(request) {
 
     private val log: Logger = LoggerFactory.getLogger(PloyRequestWrapper::class.java)
