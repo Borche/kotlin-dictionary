@@ -6,13 +6,12 @@ import javax.servlet.ServletInputStream
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletRequestWrapper
 import kotlin.text.StringBuilder
-import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 class PloyRequestWrapper(var request: HttpServletRequest, requestId: Int) :
     HttpServletRequestWrapper(request) {
 
-    private val log: Logger = LoggerFactory.getLogger(PloyRequestWrapper::class.java)
+    private val log = LoggerFactory.getLogger(PloyRequestWrapper::class.java)
 
     var bytes: ByteArray? = null
     var stream: PloyStreamWrapper? = null

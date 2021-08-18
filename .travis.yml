@@ -9,6 +9,8 @@ before_deploy: "echo 'Ready for deploy, Andreas?'"
 deploy:
   provider: heroku
   api_key:
+    # It's ok to leave this encrypted key here according to
+    # https://travis-ci.community/t/ok-to-leave-secure-api-key-in-travis-ci-yml/8316
     secure: ThlFFabz4kx+jbT7bWvRD4EauhnJqQK91huw0xojIpKVKv9ZDXbrk25ouGGOAHRg6eVD+REp91jDnxXYOELTjKSdDIGOAMBErG9kZF/0InVnbJzB2rP1vpnlz1K/+oarr0gwB7LlDcR+13+srgmCQw5lkCv2gb18OO7pn5FhFxZGh/n0r9W3cidHKjumIvrJOf5kA9SToF9FqRYpUBT6uTLniuAIgzBFhEJP0tzy0tEa60/tcfdOj0STRgcsDTDw/49fCbAJ6m/AfJNnuSGLmMUX301TF595PWaqn5e/1QeoK+3AfUp9LUHwGGQyxIQNkv9hLzWATf5F9QXp487RviBqAL1RFwvgI/f4xKl1ZHtQDuugB+0WJrCSeoU2KG8YM5+XMNwjL67nRn6fr15PAhvewaSb1qyIftPA9MXZpVmZZjAOtghnSW0RVSCP14lw+dQKolTJpPUwRJmTUYrkULoD8jxWn5y6vGY4zJMjzUtuYysBU0al7nfuwwIHPWbfoiO8P6KrVXm74U/CBPBQvUMZWt42Jea4hIauv7Rbjs+YJ89UssxSsGdEHj572kgAlu5/ENpXfAHXRJs4+5uUtXHdI6P6T4XYGX/Ti1SEjompKmlgIEHxj3Rw9B1WnKPRMCceQXLVNeL0Wm9dRT2Xsu01+6YWK93WOowdqLEoX1E=
   true:
     branch: main

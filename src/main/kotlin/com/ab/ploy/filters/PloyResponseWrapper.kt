@@ -4,15 +4,15 @@ package com.ab.ploy.filters
 import java.nio.charset.Charset
 import javax.servlet.http.HttpServletResponse
 import javax.servlet.http.HttpServletResponseWrapper
-import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.http.MediaType
 import org.springframework.web.util.ContentCachingResponseWrapper
 
-class PloyResponseWrapper(private val response: ContentCachingResponseWrapper, val requestId: Int) :
-    HttpServletResponseWrapper(response) {
+class PloyResponseWrapper(
+    private val response: ContentCachingResponseWrapper,
+    private val requestId: Int
+) : HttpServletResponseWrapper(response) {
 
-    private val log: Logger = LoggerFactory.getLogger(PloyResponseWrapper::class.java)
+    private val log = LoggerFactory.getLogger(PloyResponseWrapper::class.java)
 
     fun logResponse() {
         val builder = StringBuilder()
@@ -26,8 +26,9 @@ class PloyResponseWrapper(private val response: ContentCachingResponseWrapper, v
         builder.append("\nHeaders: ${buildHeaderString(response)}")
 
         val allBytes: ByteArray = response.contentAsByteArray
-        if (response.contentSize > 0 && response.contentType == MediaType.APPLICATION_JSON_VALUE) {
-            builder.append("Body: ${String(allBytes, Charset.forName(response.characterEncoding))}")
+        if (response.contentSize > 0) {
+            builder.append(
+                "\nBody: ${String(allBytes, Charset.forName(response.characterEncoding))}")
         }
 
         // Copy the response body content back into the real response
@@ -37,12 +38,10 @@ class PloyResponseWrapper(private val response: ContentCachingResponseWrapper, v
         log.info(builder.toString())
     }
 
-    fun buildHeaderString(response: HttpServletResponse) =
+    private fun buildHeaderString(response: HttpServletResponse) =
         if (response.headerNames.isEmpty()) "{}"
         else
-            response
-                .headerNames
-                .toList()
-                .map { "$it=${response.getHeader(it)}" }
-                .joinToString(", ", "{ ", " }")
+            response.headerNames.toList().joinToString(", ", "{ ", " }") {
+                "$it=${response.getHeader(it)}"
+            }
 }
