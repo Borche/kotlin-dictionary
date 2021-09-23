@@ -1,0 +1,9 @@
+body {
+    background-color: #fff;
+}
+
+.login-wrapper {
+    width: 512px;
+    background-color: dodgerblue;
+    border: 2px solid black;
+}
