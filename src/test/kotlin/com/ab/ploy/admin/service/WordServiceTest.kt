@@ -1,8 +1,8 @@
 /* Copyright © 2021 */
 package com.ab.ploy.admin.service
 
+import com.ab.ploy.admin.persistence.WordRepository
 import com.ab.ploy.common.models.*
-import com.ab.ploy.common.persistence.WordRepository
 import java.util.*
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach

@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
 @RequestMapping("/admin")
-class IndexController {
+class LoginController {
 
-    private val log = LoggerFactory.getLogger(IndexController::class.java.name)
+    private val log = LoggerFactory.getLogger(LoginController::class.java.name)
 
     @GetMapping
-    fun index(model: Model): String {
-        log.info("Hello")
-        return "admin/index"
+    fun login(model: Model): String {
+        log.info("Hello from Admin Login 2")
+        return "admin/login"
     }
 }

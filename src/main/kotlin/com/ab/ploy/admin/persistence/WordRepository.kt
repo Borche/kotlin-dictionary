@@ -1,5 +1,5 @@
 /* Copyright © 2021 */
-package com.ab.ploy.common.persistence
+package com.ab.ploy.admin.persistence
 
 import com.ab.ploy.common.models.Word
 import org.springframework.data.mongodb.repository.MongoRepository

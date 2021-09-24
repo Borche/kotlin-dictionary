@@ -1,11 +1,11 @@
 /* Copyright © 2021 */
 package com.ab.ploy.admin.service
 
+import com.ab.ploy.admin.persistence.WordRepository
 import com.ab.ploy.common.models.Language
 import com.ab.ploy.common.models.SimpleWord
 import com.ab.ploy.common.models.TranslatedLanguage
 import com.ab.ploy.common.models.Word
-import com.ab.ploy.common.persistence.WordRepository
 import org.springframework.stereotype.Service
 
 @Service
