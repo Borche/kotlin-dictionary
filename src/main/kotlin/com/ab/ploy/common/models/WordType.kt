@@ -1,5 +1,5 @@
 /* Copyright © 2021 */
-package com.ab.ploy.models
+package com.ab.ploy.common.models
 
 enum class WordType {
     NOUN,

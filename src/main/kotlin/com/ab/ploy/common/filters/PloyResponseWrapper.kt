@@ -1,10 +1,11 @@
 /* Copyright © 2021 */
-package com.ab.ploy.filters
+package com.ab.ploy.common.filters
 
 import java.nio.charset.Charset
 import javax.servlet.http.HttpServletResponse
 import javax.servlet.http.HttpServletResponseWrapper
 import org.slf4j.LoggerFactory
+import org.springframework.http.MediaType
 import org.springframework.web.util.ContentCachingResponseWrapper
 
 class PloyResponseWrapper(
@@ -26,7 +27,7 @@ class PloyResponseWrapper(
         builder.append("\nHeaders: ${buildHeaderString(response)}")
 
         val allBytes: ByteArray = response.contentAsByteArray
-        if (response.contentSize > 0) {
+        if (response.contentSize > 0 && response.contentType == MediaType.APPLICATION_JSON_VALUE) {
             builder.append(
                 "\nBody: ${String(allBytes, Charset.forName(response.characterEncoding))}")
         }

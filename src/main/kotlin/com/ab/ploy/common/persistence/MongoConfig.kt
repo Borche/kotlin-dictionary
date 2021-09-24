@@ -1,5 +1,5 @@
 /* Copyright © 2021 */
-package com.ab.ploy.persistence
+package com.ab.ploy.common.persistence
 
 import com.mongodb.ConnectionString
 import com.mongodb.MongoClientSettings

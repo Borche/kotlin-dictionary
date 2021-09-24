@@ -1,5 +1,5 @@
 /* Copyright © 2021 */
-package com.ab.ploy.rest
+package com.ab.ploy.admin.rest
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException
 import com.mongodb.MongoWriteException

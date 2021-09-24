@@ -1,5 +1,5 @@
 /* Copyright © 2021 */
-package com.ab.ploy.view
+package com.ab.ploy.admin.view
 
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
@@ -16,6 +16,6 @@ class IndexController {
     @GetMapping
     fun index(model: Model): String {
         log.info("Hello")
-        return "index"
+        return "admin/index"
     }
 }

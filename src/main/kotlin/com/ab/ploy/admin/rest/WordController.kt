@@ -1,8 +1,8 @@
 /* Copyright © 2021 */
-package com.ab.ploy.rest
+package com.ab.ploy.admin.rest
 
-import com.ab.ploy.models.Word
-import com.ab.ploy.services.WordService
+import com.ab.ploy.admin.service.WordService
+import com.ab.ploy.common.models.Word
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

@@ -1,5 +1,5 @@
 /* Copyright © 2021 */
-package com.ab.ploy.filters
+package com.ab.ploy.common.filters
 
 import java.nio.charset.Charset
 import javax.servlet.ServletInputStream
@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletRequestWrapper
 import kotlin.text.StringBuilder
 import org.slf4j.LoggerFactory
+import org.springframework.http.MediaType
 
 class PloyRequestWrapper(var request: HttpServletRequest, requestId: Int) :
     HttpServletRequestWrapper(request) {
@@ -28,7 +29,7 @@ class PloyRequestWrapper(var request: HttpServletRequest, requestId: Int) :
         builder.append("\nContent-Length: ${request.contentLength}")
         builder.append("\nHeaders: ${buildHeaderString(request)}")
 
-        if (request.contentLength > 0) {
+        if (request.contentLength > 0 && MediaType.APPLICATION_JSON_VALUE == request.contentType) {
             val allBytes: ByteArray = request.inputStream.readAllBytes()
 
             builder.append("\nBody: ${buildPayload(allBytes)}")

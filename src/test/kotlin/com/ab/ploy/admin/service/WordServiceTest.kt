@@ -1,23 +1,18 @@
 /* Copyright © 2021 */
-package com.ab.ploy.services
+package com.ab.ploy.admin.service
 
-import com.ab.ploy.models.Language
-import com.ab.ploy.models.SimpleWord
-import com.ab.ploy.models.TranslatedLanguage
-import com.ab.ploy.models.Word
-import com.ab.ploy.models.WordType
-import com.ab.ploy.persistence.WordRepository
+import com.ab.ploy.common.models.*
+import com.ab.ploy.common.persistence.WordRepository
 import java.util.*
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers
 import org.mockito.Mockito
-import org.mockito.Mockito.mock
 
 class WordServiceTest() {
 
-    private val wordRepository = mock(WordRepository::class.java)
+    private val wordRepository = Mockito.mock(WordRepository::class.java)
 
     private lateinit var wordService: WordService
 
@@ -43,7 +38,7 @@ class WordServiceTest() {
         Assertions.assertEquals(1, result[Language.SWEDISH])
         Assertions.assertEquals(1, result[Language.ENGLISH])
         Assertions.assertEquals(1, result[Language.SPANISH])
-        Mockito.verify(wordRepository, Mockito.times(3)).save(any())
+        Mockito.verify(wordRepository, Mockito.times(3)).save(ArgumentMatchers.any())
     }
 
     @Test
@@ -61,7 +56,7 @@ class WordServiceTest() {
         Assertions.assertEquals(1, result[Language.SWEDISH])
         Assertions.assertEquals(null, result[Language.ENGLISH])
         Assertions.assertEquals(1, result[Language.SPANISH])
-        Mockito.verify(wordRepository, Mockito.times(2)).save(any())
+        Mockito.verify(wordRepository, Mockito.times(2)).save(ArgumentMatchers.any())
     }
 
     @Test
@@ -79,7 +74,7 @@ class WordServiceTest() {
         Assertions.assertEquals(1, result[Language.SWEDISH])
         Assertions.assertEquals(1, result[Language.ENGLISH])
         Assertions.assertEquals(null, result[Language.SPANISH])
-        Mockito.verify(wordRepository, Mockito.times(2)).save(any())
+        Mockito.verify(wordRepository, Mockito.times(2)).save(ArgumentMatchers.any())
     }
 
     @Test
@@ -94,7 +89,7 @@ class WordServiceTest() {
         Assertions.assertEquals(1, result[Language.SWEDISH])
         Assertions.assertEquals(null, result[Language.ENGLISH])
         Assertions.assertEquals(null, result[Language.SPANISH])
-        Mockito.verify(wordRepository, Mockito.times(1)).save(any())
+        Mockito.verify(wordRepository, Mockito.times(1)).save(ArgumentMatchers.any())
     }
 
     private fun createWord(

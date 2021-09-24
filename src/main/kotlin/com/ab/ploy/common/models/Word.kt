@@ -1,5 +1,5 @@
 /* Copyright © 2021 */
-package com.ab.ploy.models
+package com.ab.ploy.common.models
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.PersistenceConstructor

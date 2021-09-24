@@ -1,5 +1,5 @@
 /* Copyright © 2021 */
-package com.ab.ploy.filters
+package com.ab.ploy.common.filters
 
 import java.util.concurrent.atomic.AtomicInteger
 import javax.servlet.FilterChain

@@ -1,7 +1,7 @@
 /* Copyright © 2021 */
-package com.ab.ploy.persistence
+package com.ab.ploy.common.persistence
 
-import com.ab.ploy.models.Word
+import com.ab.ploy.common.models.Word
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
