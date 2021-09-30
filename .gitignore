@@ -1,5 +1,6 @@
 ### Andreas ###
 .env
+.DS_Store
 
 HELP.md
 target/
