@@ -29,7 +29,8 @@ class PloyRequestWrapper(var request: HttpServletRequest, requestId: Int) :
         builder.append("\nContent-Length: ${request.contentLength}")
         builder.append("\nHeaders: ${buildHeaderString(request)}")
 
-        if (request.contentLength > 0 && MediaType.APPLICATION_JSON_VALUE == request.contentType) {
+        if (request.contentLength > 0 &&
+            request.contentType.contains(MediaType.APPLICATION_JSON_VALUE)) {
             val allBytes: ByteArray = request.inputStream.readAllBytes()
 
             builder.append("\nBody: ${buildPayload(allBytes)}")

@@ -27,7 +27,8 @@ class PloyResponseWrapper(
         builder.append("\nHeaders: ${buildHeaderString(response)}")
 
         val allBytes: ByteArray = response.contentAsByteArray
-        if (response.contentSize > 0 && response.contentType == MediaType.APPLICATION_JSON_VALUE) {
+        if (response.contentSize > 0 &&
+            response.contentType.contains(MediaType.APPLICATION_JSON_VALUE)) {
             builder.append(
                 "\nBody: ${String(allBytes, Charset.forName(response.characterEncoding))}")
         }
