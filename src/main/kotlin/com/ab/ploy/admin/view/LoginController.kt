@@ -6,16 +6,27 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.servlet.ModelAndView
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping
 class LoginController {
 
     private val log = LoggerFactory.getLogger(LoginController::class.java.name)
 
-    @GetMapping
-    fun login(model: Model): String {
-        log.info("Hello from Admin Login 2")
-        return "admin/login"
+    @GetMapping("/login")
+    fun login(model: Model): ModelAndView {
+        log.info("Hello from /login")
+        val loginView = ModelAndView()
+        loginView.viewName = "admin/login"
+        return loginView
+    }
+
+    @GetMapping("/home")
+    fun home(model: Model): ModelAndView {
+        log.info("Hello from /home")
+        val homeView = ModelAndView()
+        homeView.viewName = "admin/home"
+        return homeView
     }
 }
