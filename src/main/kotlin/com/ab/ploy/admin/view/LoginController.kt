@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.ModelAndView
 
 @Controller
-@RequestMapping
+@RequestMapping("/admin")
 class LoginController {
 
     private val log = LoggerFactory.getLogger(LoginController::class.java.name)
@@ -22,7 +22,7 @@ class LoginController {
         return loginView
     }
 
-    @GetMapping("/home")
+    @GetMapping("/", "/home")
     fun home(model: Model): ModelAndView {
         log.info("Hello from /home")
         val homeView = ModelAndView()

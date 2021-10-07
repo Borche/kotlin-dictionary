@@ -22,16 +22,16 @@ class WebSecurity : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         http {
             authorizeRequests {
-                authorize("/login", permitAll)
-                authorize("/main.css", permitAll)
-                authorize("/main.js", permitAll)
-                authorize("/access-denied", permitAll)
-                authorize("/**", hasRole("ADMIN"))
+                authorize("/admin/access-denied", permitAll)
+                authorize("/admin/login", permitAll)
+                authorize("/admin/main.css", permitAll)
+                authorize("/admin/main.js", permitAll)
+                authorize("/admin/**", hasRole("ADMIN"))
             }
             formLogin {
-                loginPage = "/login"
+                loginPage = "/admin/login"
                 permitAll = true
-                defaultSuccessUrl("/home", true)
+                defaultSuccessUrl("/admin/", true)
             }
             logout { permitAll = true }
             exceptionHandling {
@@ -39,7 +39,7 @@ class WebSecurity : WebSecurityConfigurerAdapter() {
                 defaultAuthenticationEntryPointFor(
                     HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
                     AntPathRequestMatcher("/admin/api/**"))
-                accessDeniedPage = "/access-denied"
+                accessDeniedPage = "/admin/access-denied"
             }
         }
     }
