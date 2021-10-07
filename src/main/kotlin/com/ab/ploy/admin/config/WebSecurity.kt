@@ -2,6 +2,7 @@
 package com.ab.ploy.admin.config
 
 import org.springframework.context.annotation.Bean
+import org.springframework.http.HttpStatus
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
@@ -10,6 +11,8 @@ import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
+import org.springframework.security.web.authentication.HttpStatusEntryPoint
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 
 @EnableWebSecurity(debug = true)
 class WebSecurity : WebSecurityConfigurerAdapter() {
@@ -22,7 +25,8 @@ class WebSecurity : WebSecurityConfigurerAdapter() {
                 authorize("/login", permitAll)
                 authorize("/main.css", permitAll)
                 authorize("/main.js", permitAll)
-                authorize("/**", hasAnyRole("ADMIN", "USER"))
+                authorize("/access-denied", permitAll)
+                authorize("/**", hasRole("ADMIN"))
             }
             formLogin {
                 loginPage = "/login"
@@ -30,6 +34,13 @@ class WebSecurity : WebSecurityConfigurerAdapter() {
                 defaultSuccessUrl("/home", true)
             }
             logout { permitAll = true }
+            exceptionHandling {
+                // Return 401 for the REST endpoints instead of Login Page
+                defaultAuthenticationEntryPointFor(
+                    HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
+                    AntPathRequestMatcher("/admin/api/**"))
+                accessDeniedPage = "/access-denied"
+            }
         }
     }
 

@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/words")
+@RequestMapping("/admin/api/words")
 class WordController(val wordService: WordService) {
 
     @GetMapping fun getWords() = wordService.getWords()
 
     @PostMapping fun createWord(@RequestBody word: Word) = wordService.createWord(word)
+
+    @GetMapping("/hehe") fun lawl() = "tjenare2"
 }

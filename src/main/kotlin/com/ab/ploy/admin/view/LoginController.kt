@@ -29,4 +29,6 @@ class LoginController {
         homeView.viewName = "admin/home"
         return homeView
     }
+
+    @GetMapping("/access-denied") fun access_denied(model: Model) = "admin/access_denied"
 }
