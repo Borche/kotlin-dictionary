@@ -1,3 +1,3 @@
 function andreas() {
-    console.log("Inside Andreas")
+    console.log("Inside Andreas Admin")
 }

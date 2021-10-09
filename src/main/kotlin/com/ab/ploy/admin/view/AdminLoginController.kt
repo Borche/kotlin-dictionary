@@ -10,9 +10,9 @@ import org.springframework.web.servlet.ModelAndView
 
 @Controller
 @RequestMapping("/admin")
-class LoginController {
+class AdminLoginController {
 
-    private val log = LoggerFactory.getLogger(LoginController::class.java.name)
+    private val log = LoggerFactory.getLogger(AdminLoginController::class.java.name)
 
     @GetMapping("/login")
     fun login(model: Model): ModelAndView {
@@ -29,6 +29,4 @@ class LoginController {
         homeView.viewName = "admin/home"
         return homeView
     }
-
-    @GetMapping("/access-denied") fun access_denied(model: Model) = "admin/access_denied"
 }

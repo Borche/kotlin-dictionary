@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fff;
+}
+
+.login-wrapper {
+    padding: 32px;
+    width: 512px;
+    background-color: mediumseagreen;
+    border: 2px solid black;
+    margin: 20% auto;
+}

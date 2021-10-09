@@ -16,12 +16,6 @@ class ExceptionMapper {
 
     private val log = LoggerFactory.getLogger(ExceptionMapper::class.java)
 
-    @ExceptionHandler(Throwable::class)
-    fun handleAll(t: Throwable, request: WebRequest): ResponseEntity<ErrorResponse> {
-        log.error(t.message)
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ErrorResponse("Ajdå"))
-    }
-
     @ExceptionHandler(MongoWriteException::class, DuplicateKeyException::class)
     fun handleMongoWriteException(
         e: MongoWriteException,

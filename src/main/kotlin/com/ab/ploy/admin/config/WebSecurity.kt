@@ -2,6 +2,8 @@
 package com.ab.ploy.admin.config
 
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.core.annotation.Order
 import org.springframework.http.HttpStatus
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -15,34 +17,64 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 
 @EnableWebSecurity(debug = true)
-class WebSecurity : WebSecurityConfigurerAdapter() {
+class WebSecurity {
 
-    @Bean fun passwordEncoder() = BCryptPasswordEncoder()
-
-    override fun configure(http: HttpSecurity) {
-        http {
-            authorizeRequests {
-                authorize("/admin/access-denied", permitAll)
-                authorize("/admin/login", permitAll)
-                authorize("/admin/main.css", permitAll)
-                authorize("/admin/main.js", permitAll)
-                authorize("/admin/**", hasRole("ADMIN"))
-            }
-            formLogin {
-                loginPage = "/admin/login"
-                permitAll = true
-                defaultSuccessUrl("/admin/", true)
-            }
-            logout { permitAll = true }
-            exceptionHandling {
-                // Return 401 for the REST endpoints instead of Login Page
-                defaultAuthenticationEntryPointFor(
-                    HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
-                    AntPathRequestMatcher("/admin/api/**"))
-                accessDeniedPage = "/admin/access-denied"
+    @Order(1)
+    @Configuration
+    class AdminSecurity : WebSecurityConfigurerAdapter() {
+        override fun configure(http: HttpSecurity) {
+            http {
+                securityMatcher("/admin/**")
+                authorizeRequests {
+                    authorize("/admin/login", permitAll)
+                    authorize("/admin/main.css", permitAll)
+                    authorize("/admin/main.js", permitAll)
+                    authorize("/admin/**", hasRole("ADMIN"))
+                }
+                formLogin {
+                    loginProcessingUrl = "/admin/login"
+                    loginPage = "/admin/login"
+                    permitAll = true
+                    defaultSuccessUrl("/admin/", true)
+                }
+                logout { permitAll = true }
+                exceptionHandling {
+                    // Return 401 for the REST endpoints instead of Login Page
+                    defaultAuthenticationEntryPointFor(
+                        HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
+                        AntPathRequestMatcher("/admin/api/**"))
+                }
             }
         }
     }
+
+    @Order(2)
+    @Configuration
+    class PublicSecurity : WebSecurityConfigurerAdapter() {
+        override fun configure(http: HttpSecurity) {
+            http {
+                authorizeRequests {
+                    authorize("/login", permitAll)
+                    authorize("/", hasRole("USER"))
+                }
+                formLogin {
+                    loginProcessingUrl = "/login"
+                    loginPage = "/login"
+                    permitAll = true
+                    defaultSuccessUrl("/", true)
+                }
+                logout { permitAll = true }
+                exceptionHandling {
+                    // Return 401 for the REST endpoints instead of Login Page
+                    defaultAuthenticationEntryPointFor(
+                        HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
+                        AntPathRequestMatcher("/public/api/**"))
+                }
+            }
+        }
+    }
+
+    @Bean fun passwordEncoder() = BCryptPasswordEncoder()
 
     @Bean
     fun inMemoryUserDetailsManager(): InMemoryUserDetailsManager? {
