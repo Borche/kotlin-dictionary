@@ -29,4 +29,12 @@ class AdminLoginController {
         homeView.viewName = "admin/home"
         return homeView
     }
+
+    @GetMapping("/index")
+    fun index(model: Model): ModelAndView {
+        log.info("Hello from /home")
+        val homeView = ModelAndView()
+        homeView.viewName = "admin/index"
+        return homeView
+    }
 }

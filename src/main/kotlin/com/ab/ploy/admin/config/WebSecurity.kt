@@ -3,9 +3,11 @@ package com.ab.ploy.admin.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 import org.springframework.core.annotation.Order
 import org.springframework.http.HttpStatus
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.web.servlet.invoke
@@ -19,6 +21,19 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 @EnableWebSecurity(debug = true)
 class WebSecurity {
 
+    @Profile("local")
+    @Configuration
+    class LocalSecurity : WebSecurityConfigurerAdapter() {
+        override fun configure(web: WebSecurity) {
+            web.ignoring().antMatchers("/**")
+        }
+
+        override fun configure(http: HttpSecurity) {
+            http { authorizeRequests { authorize("/**", permitAll) } }
+        }
+    }
+
+    @Profile("!local")
     @Order(1)
     @Configuration
     class AdminSecurity : WebSecurityConfigurerAdapter() {
@@ -35,7 +50,7 @@ class WebSecurity {
                     loginProcessingUrl = "/admin/login"
                     loginPage = "/admin/login"
                     permitAll = true
-                    defaultSuccessUrl("/admin/", true)
+                    defaultSuccessUrl("/admin/index", true)
                 }
                 logout { permitAll = true }
                 exceptionHandling {
@@ -48,6 +63,7 @@ class WebSecurity {
         }
     }
 
+    @Profile("!local")
     @Order(2)
     @Configuration
     class PublicSecurity : WebSecurityConfigurerAdapter() {
