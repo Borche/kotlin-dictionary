@@ -1,15 +1,12 @@
 import React from 'react';
+import WordSearch from '../word-search/word-search.component';
 
 class Header extends React.Component {
   render() {
     return (
-      <div>
-        <p>Sök här</p>
-        <p>Skapa nytt svenskt ord</p>
-        <p>Skapa nytt engelskt ord</p>
-        <p>Skapa nytt spanskt ord</p>
-        <p>LOGGA UT</p>
-      </div>
+      <header>
+        <WordSearch></WordSearch>
+      </header>
     );
   }
 }

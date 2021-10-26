@@ -4,6 +4,7 @@ package com.ab.ploy.admin.rest
 import com.ab.ploy.admin.service.WordService
 import com.ab.ploy.common.models.Word
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/admin/api/words")
 class WordController(val wordService: WordService) {
+
+    @GetMapping("/{word}") fun getWord(@PathVariable word: String) = wordService.getWord(word)
 
     @GetMapping fun getWords() = wordService.getWords()
 
