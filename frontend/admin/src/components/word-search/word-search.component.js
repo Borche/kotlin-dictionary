@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './word-search.styles.scss';
+
 class WordSearch extends React.Component {
   async search(event) {
     const { value } = event.target;
@@ -15,8 +17,8 @@ class WordSearch extends React.Component {
 
   render() {
     return (
-      <div>
-        <label htmlFor="word-search"></label>
+      <div className="c-word-search">
+        <label htmlFor="word-search">Existing word</label><br />
         <input type="text" id="word-search" onChange={this.search}></input>
       </div>
     );

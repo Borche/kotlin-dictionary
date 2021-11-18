@@ -1,0 +1,21 @@
+.c-word-search {
+  label {
+    color: white;
+    font-size: 1.3rem;
+  }
+
+  input[type=text] {
+    margin-top: 2px;
+    padding: 4px 8px;
+    outline: none;
+    border: none;
+    border-radius: 4px;    
+  }
+
+  input[type=text]:before {
+    content: '\1F50D';
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
