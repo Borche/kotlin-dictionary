@@ -1,14 +1,14 @@
-import './App.scss';
-import { Component } from 'react';
-import Header from './components/header/header.component';
-import Body from './components/body/body.component';
-import Footer from './components/footer/footer.component';
+import "./App.scss";
+import { Component } from "react";
+import Header from "./components/header/header.component";
+import Body from "./components/body/body.component";
+import Footer from "./components/footer/footer.component";
 
 class App extends Component {
   async componentDidMount() {
-    const response = await fetch('/admin/api/words');
+    const response = await fetch("/admin/api/words");
     const body = await response.json();
-    console.log(body);
+    console.log("Body", body);
   }
 
   render() {

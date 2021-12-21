@@ -1,7 +1,10 @@
 import CurrentStateTypes from "./current-state.types";
 
 const INITIAL_STATE = {
-  action: {},
+  action: {
+    name: "",
+    description: "",
+  },
 };
 
 const currentActionReducer = (state = INITIAL_STATE, action) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import WordSearch from "../word-search/word-search.component";
-import AddWord from "../addword/addword.component";
+import NewWordButton from "../new-word-button/new-word-button.component";
 
 import "./header.styles.scss";
 
@@ -9,7 +9,7 @@ class Header extends React.Component {
     return (
       <header className="header-main">
         <WordSearch></WordSearch>
-        <AddWord language="SWEDISH"></AddWord>
+        <NewWordButton language="SWEDISH"></NewWordButton>
       </header>
     );
   }

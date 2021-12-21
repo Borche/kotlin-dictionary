@@ -2,17 +2,18 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { addSwedishWord } from "../../redux/current-state/current-state.actions";
+import { selectCurrentAction } from "../../redux/current-state/current-state.selectors";
 
-import "./addword.styles.scss";
+import "./new-word-button.styles.scss";
 
 class Header extends React.Component {
   componentDidMount() {
-    const { language } = this.props;
-    console.log(this.props);
+    const { language, currentAction } = this.props;
   }
 
   render() {
-    const { addSwedishWordStart } = this.props;
+    const { addSwedishWordStart, currentAction } = this.props;
+    console.log("props", this.props);
 
     return (
       <button onClick={addSwedishWordStart}>
@@ -26,4 +27,8 @@ const mapDispatchToProps = (dispatch) => ({
   addSwedishWordStart: () => dispatch(addSwedishWord()),
 });
 
-export default connect(null, mapDispatchToProps)(Header);
+const mapStateToProps = (state) => ({
+  currentAction: selectCurrentAction(state),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

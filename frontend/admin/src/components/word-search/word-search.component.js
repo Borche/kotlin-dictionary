@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import './word-search.styles.scss';
+import "./word-search.styles.scss";
 
 class WordSearch extends React.Component {
   async search(event) {
@@ -8,7 +8,7 @@ class WordSearch extends React.Component {
 
     const response = await fetch(`/admin/api/words/${value}`);
 
-    console.log(response);
+    // console.log(response);
 
     const data = await response.json();
 
@@ -18,7 +18,8 @@ class WordSearch extends React.Component {
   render() {
     return (
       <div className="c-word-search">
-        <label htmlFor="word-search">Existing word</label><br />
+        <label htmlFor="word-search">Existing word</label>
+        <br />
         <input type="text" id="word-search" onChange={this.search}></input>
       </div>
     );

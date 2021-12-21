@@ -1,7 +1,15 @@
-import React from 'react';
+import React from "react";
+import { connect } from "react-redux";
+import { selectCurrentAction } from "../../redux/current-state/current-state.selectors";
+import { addSwedishWord } from "../../redux/current-state/current-state.actions";
+import NewSwedishWord from "../new-swedish-word/new-swedish-word.component";
+import NewEnglishWord from "../new-english-word/new-english-word.component";
+import NewSpanishWord from "../new-spanish-word/new-spanish-word.component";
+
+import "./body.styles.scss";
 
 class Body extends React.Component {
-  render() {
+  initialDisplay() {
     return (
       <div>
         <p>Sök här</p>
@@ -12,6 +20,55 @@ class Body extends React.Component {
       </div>
     );
   }
+
+  addSwedishWord() {
+    return (
+      <div className="body-main">
+        <div className="new-words-container">
+          <NewSwedishWord></NewSwedishWord>
+          <NewEnglishWord></NewEnglishWord>
+          <NewSpanishWord></NewSpanishWord>
+        </div>
+        <button onClick={this.submitNewWord}>Submit</button>
+      </div>
+    );
+  }
+
+  submitNewWord = async () => {
+    await fetch(`/admin/api/words`, {
+      method: "POST",
+      body: JSON.stringify({
+        ...this.props.swedishWord,
+        language: "SWEDISH",
+        translatedLanguages: {
+          ENGLISH: {
+            propagate: false,
+            translations: [{ ...this.props.englishWord }],
+          },
+          SPANISH: {
+            propagate: false,
+            translations: [{ ...this.props.spanishWord }],
+          },
+        },
+      }),
+    });
+  };
+
+  render() {
+    const { currentAction } = this.props;
+    console.log("ASD", this.props);
+
+    return currentAction.name == "ADDING_SWEDISH_WORD"
+      ? this.addSwedishWord()
+      : this.initialDisplay();
+  }
 }
 
-export default Body;
+const mapStateToProps = (state) => ({
+  currentAction: selectCurrentAction(state),
+  swedishWord: state.swedishWord,
+  englishWord: state.englishWord,
+  spanishWord: state.spanishWord,
+});
+
+export default connect(mapStateToProps, null)(Body);
