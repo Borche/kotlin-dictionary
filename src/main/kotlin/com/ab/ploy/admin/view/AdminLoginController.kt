@@ -22,7 +22,7 @@ class AdminLoginController {
         return loginView
     }
 
-    @GetMapping("/", "/home")
+    @GetMapping("", "/home")
     fun home(model: Model): ModelAndView {
         log.info("Hello from /home")
         val homeView = ModelAndView()

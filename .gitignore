@@ -2,6 +2,8 @@
 .env
 .DS_Store
 frontend/node_modules
+node_modules
+yarn.lock
 
 HELP.md
 target/
