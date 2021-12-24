@@ -7,12 +7,8 @@ import { selectCurrentAction } from "../../redux/current-state/current-state.sel
 import "./new-word-button.styles.scss";
 
 class Header extends React.Component {
-  componentDidMount() {
-    const { language, currentAction } = this.props;
-  }
-
   render() {
-    const { addSwedishWordStart, currentAction } = this.props;
+    const { addSwedishWordStart } = this.props;
     console.log("props", this.props);
 
     return (

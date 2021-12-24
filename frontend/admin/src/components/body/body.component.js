@@ -60,7 +60,7 @@ class Body extends React.Component {
     const { currentAction } = this.props;
     console.log("ASD", this.props);
 
-    return currentAction.name == "ADDING_SWEDISH_WORD"
+    return currentAction.name === "ADDING_SWEDISH_WORD"
       ? this.addSwedishWord()
       : this.initialDisplay();
   }

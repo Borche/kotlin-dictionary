@@ -27,8 +27,8 @@ class NewSpanishWord extends React.Component {
     return (
       <table>
         <tbody>
-          <tr class="title-row">
-            <td colspan="2">Spanish</td>
+          <tr className="title-row">
+            <td colSpan="2">Spanish</td>
             <td></td>
           </tr>
           <tr>
