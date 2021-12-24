@@ -1,10 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { selectCurrentAction } from "../../redux/current-state/current-state.selectors";
-import { addSwedishWord } from "../../redux/current-state/current-state.actions";
-import NewSwedishWord from "../new-swedish-word/new-swedish-word.component";
-import NewEnglishWord from "../new-english-word/new-english-word.component";
-import NewSpanishWord from "../new-spanish-word/new-spanish-word.component";
+import NewSwedishWord from "../new-word/new-swedish-word/new-swedish-word.component";
+import NewEnglishWord from "../new-word/new-english-word/new-english-word.component";
+import NewSpanishWord from "../new-word/new-spanish-word/new-spanish-word.component";
 
 import "./body.styles.scss";
 
@@ -45,12 +44,12 @@ class Body extends React.Component {
         language: "SWEDISH",
         translatedLanguages: {
           ENGLISH: {
-            propagate: false,
-            translations: [{ ...this.props.englishWord }],
+            propagate: this.props.englishWord.propagate,
+            translations: [{ word: this.props.englishWord.word }],
           },
           SPANISH: {
-            propagate: false,
-            translations: [{ ...this.props.spanishWord }],
+            propagate: this.props.spanishWord.propagate,
+            translations: [{ word: this.props.spanishWord.word }],
           },
         },
       }),

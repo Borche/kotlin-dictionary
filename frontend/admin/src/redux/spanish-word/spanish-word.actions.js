@@ -1,6 +1,11 @@
 import SpanishWordTypes from "./spanish-word.types";
 
-export const updateSpanishWord = (word) => ({
+export const updateSpanishWord = (obj) => ({
   type: SpanishWordTypes.UPDATING_SPANISH_WORD,
-  payload: word,
+  payload: obj,
+});
+
+export const updateSpanishPropagate = (obj) => ({
+  type: SpanishWordTypes.UPDATING_SPANISH_PROPAGATE,
+  payload: obj,
 });

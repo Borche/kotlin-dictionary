@@ -4,7 +4,9 @@ import { connect } from "react-redux";
 import {
   updateSwedishWord,
   updateSwedishType,
-} from "../../redux/swedish-word/swedish-word.actions";
+} from "../../../redux/swedish-word/swedish-word.actions";
+
+import "../new-word.styles.scss";
 
 class NewSwedishWord extends React.Component {
   DEAULT_TYPE = "VERB";
@@ -25,6 +27,10 @@ class NewSwedishWord extends React.Component {
     return (
       <table>
         <tbody>
+          <tr class="title-row">
+            <td colspan="2">Swedish</td>
+            <td></td>
+          </tr>
           <tr>
             <td>
               <label htmlFor="swe-type">Word</label>
@@ -56,8 +62,8 @@ class NewSwedishWord extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  updateWord: (word) => dispatch(updateSwedishWord(word)),
-  updateType: (word) => dispatch(updateSwedishType(word)),
+  updateWord: (obj) => dispatch(updateSwedishWord(obj)),
+  updateType: (obj) => dispatch(updateSwedishType(obj)),
 });
 
 export default connect(null, mapDispatchToProps)(NewSwedishWord);

@@ -1,5 +1,6 @@
 const SpanishWordTypes = {
   UPDATING_SPANISH_WORD: "UPDATING_SPANISH_WORD",
+  UPDATING_SPANISH_PROPAGATE: "UPDATING_SPANISH_PROPAGATE",
 };
 
 export default SpanishWordTypes;

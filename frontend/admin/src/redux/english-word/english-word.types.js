@@ -1,5 +1,6 @@
 const EnglishWordTypes = {
   UPDATING_ENGLISH_WORD: "UPDATING_ENGLISH_WORD",
+  UPDATING_ENGLISH_PROPAGATE: "UPDATING_ENGLISH_PROPAGATE",
 };
 
 export default EnglishWordTypes;
