@@ -18,7 +18,10 @@ class ExceptionMapper {
     private val log = LoggerFactory.getLogger(ExceptionMapper::class.java)
 
     @ExceptionHandler(EmptyResultDataAccessException::class)
-    fun handleEmptyResultDataAccessException(e: EmptyResultDataAccessException, request: WebRequest): ResponseEntity<ErrorResponse> {
+    fun handleEmptyResultDataAccessException(
+        e: EmptyResultDataAccessException,
+        request: WebRequest
+    ): ResponseEntity<ErrorResponse> {
         return ResponseEntity.badRequest().body(ErrorResponse("Word not found"))
     }
 
@@ -42,6 +45,12 @@ class ExceptionMapper {
         request: WebRequest
     ): ResponseEntity<ErrorResponse> {
         log.error(e.message)
+        if (e.targetType.enumConstants != null) {
+            return ResponseEntity.badRequest()
+                .body(
+                    ErrorResponse(
+                        "${e.path[0].fieldName} must be set to one of [${e.targetType.enumConstants.joinToString(",")}]"))
+        }
         return ResponseEntity.badRequest().body(ErrorResponse("Invalid value or format"))
     }
 }

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service
 @Service
 class WordService(private val wordRepository: WordRepository) {
 
-
     fun getWord(word: String) = wordRepository.findByWord(word)
 
     fun getWords(): MutableList<Word> = wordRepository.findAll()

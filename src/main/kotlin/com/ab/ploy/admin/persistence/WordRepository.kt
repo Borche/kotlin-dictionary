@@ -5,6 +5,7 @@ import com.ab.ploy.common.models.Word
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
-@Repository interface WordRepository : MongoRepository<Word, String> {
+@Repository
+interface WordRepository : MongoRepository<Word, String> {
     fun findByWord(word: String): Word
 }

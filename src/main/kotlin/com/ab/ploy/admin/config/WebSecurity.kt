@@ -18,7 +18,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.authentication.HttpStatusEntryPoint
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity(debug = false)
 class WebSecurity {
 
     @Profile("local")
