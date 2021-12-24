@@ -37,6 +37,9 @@ class Body extends React.Component {
   submitNewWord = async () => {
     await fetch(`/admin/api/words`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         ...this.props.swedishWord,
         language: "SWEDISH",
