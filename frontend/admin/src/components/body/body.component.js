@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import Cookies from "js-cookie";
+
 import { selectCurrentAction } from "../../redux/current-state/current-state.selectors";
 import NewSwedishWord from "../new-word/new-swedish-word/new-swedish-word.component";
 import NewEnglishWord from "../new-word/new-english-word/new-english-word.component";
@@ -34,10 +36,12 @@ class Body extends React.Component {
   }
 
   submitNewWord = async () => {
+    console.log("Cookies", document.cookie);
     await fetch(`/admin/api/words`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "X-XSRF-TOKEN": Cookies.get("XSRF-TOKEN"),
       },
       body: JSON.stringify({
         ...this.props.swedishWord,

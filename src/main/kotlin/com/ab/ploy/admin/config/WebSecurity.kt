@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.authentication.HttpStatusEntryPoint
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 
 @EnableWebSecurity(debug = false)
@@ -39,6 +40,7 @@ class WebSecurity {
     class AdminSecurity : WebSecurityConfigurerAdapter() {
         override fun configure(http: HttpSecurity) {
             http {
+                csrf { csrfTokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse() }
                 securityMatcher("/admin/**")
                 authorizeRequests {
                     authorize("/admin/login", permitAll)
@@ -69,6 +71,7 @@ class WebSecurity {
     class PublicSecurity : WebSecurityConfigurerAdapter() {
         override fun configure(http: HttpSecurity) {
             http {
+                csrf { csrfTokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse() }
                 authorizeRequests {
                     authorize("/login", permitAll)
                     authorize("/", hasRole("USER"))
